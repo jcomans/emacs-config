@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: bre
+# key: bre
+# --
+BOOST_REQUIRE_EQUAL($1,$2);$0

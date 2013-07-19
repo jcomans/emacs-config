@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: c++header
+# key: c++header
+# --
+//************************************************************
+// `(file-name-nondirectory (buffer-file-name))`
+//
+// Created on `(current-time-string)` by Jan Comans
+//
+// Copyright `(insert (format-time-string "%Y"))` Jan Comans -- jan@comans.be
+//
+// License: Boost Software License Version 1.0
+// See LICENSE_1_0.txt or http://www.boost.org/LICENSE_1_0.txt
+//************************************************************
+
