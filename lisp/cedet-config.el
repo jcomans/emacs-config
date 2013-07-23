@@ -10,11 +10,17 @@
 	global-semantic-highlight-func-mode
 	global-semantic-decoration-mode
 	global-semantic-stickyfunc-mode ))
+
 ;; Enable Semantic code analyzer
 (semantic-mode t)
 
 ;; Enable EDE
 (global-ede-mode t)
+
+;; Check if there are project definitions
+(if (file-directory-p "~/.emacs.d/ede-projects")
+    (elisp-load-dir "~/.emacs.d/ede-projects"))
+    
 
 ;; Example project definition
 ;; (ede-cpp-root-project "NAME" :file "FILENAME"

@@ -100,3 +100,8 @@
 (setq ispell-program-name "aspell")
 (setq ispell-list-command "list")
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Additional functionality
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(add-to-list 'load-path "~/.emacs.d/lisp/vendor/load-dir")
+(require 'elisp-load-dir)
