@@ -66,6 +66,9 @@
 (setq ido-everywhere t)
 (ido-mode t)
 
+;; Enable 'advanced' commands
+(put 'upcase-region 'disabled nil)
+
 ;; Enable fullscreen switching and bind to F11
 (defun toggle-fullscreen (&optional f)
   (interactive)
