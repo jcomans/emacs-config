@@ -19,6 +19,9 @@
 ;; Global key binding
 (global-set-key "\C-cc" 'org-capture)
 (global-set-key "\C-ca" 'org-agenda)
+(global-set-key (kbd "<f5>")   'org-mobile-push)
+(global-set-key (kbd "C-<f5>") 'org-save-all-org-buffers)
+(global-set-key (kbd "<f9>")   'org-mobile-pull)
 
 ;; Capture setup
 (setq org-default-notes-file
