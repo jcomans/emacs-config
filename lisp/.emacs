@@ -11,3 +11,4 @@
 (load "~/.emacs.d/lisp/yasnippet-config" nil t)
 (load "~/.emacs.d/lisp/magit-config"     nil t)
 (load "~/.emacs.d/lisp/org-mode-config"  nil t)
+(load "~/.emacs.d/lisp/lua-mode-config"  nil t)
