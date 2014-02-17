@@ -92,6 +92,15 @@
 	    (when server-buffer-clients
 	      (local-set-key (kbd "C-x k") 'server-edit))))
 
+;; When opening 2 files, show them side-by-side
+(defun 2-windows-vertical-to-horizontal ()
+  (let ((buffers (mapcar 'window-buffer (window-list))))
+    (when (= 2 (length buffers))
+      (delete-other-windows)
+      (set-window-buffer (split-window-horizontally) (cadr buffers)))))
+
+(add-hook 'emacs-startup-hook '2-windows-vertical-to-horizontal)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; External programs
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
