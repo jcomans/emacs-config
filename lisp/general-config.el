@@ -45,6 +45,9 @@
 ;; Show matching parentheses
 (show-paren-mode 1)
 
+;; Never use tabs
+(setq-default indent-tabs-mode nil)
+
 ;; Use indenting in visual line mode
 (add-to-list 'load-path "~/.emacs.d/lisp/vendor/adaptive-wrap")
 (require 'adaptive-wrap)
