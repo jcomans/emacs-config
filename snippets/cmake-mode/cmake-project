@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: cmake-project
+# key: cmake-project
+# --
+project($1)
+cmake_minimum_required(VERSION 2.8.0)
+
+set(CMAKE_BUILD_TYPE ${2:Debug})
+
+find_package(Boost 1.50 COMPONENTS program_options)
+
+include_directories(\${BOOST_INCLUDE_DIR})
+
+set($1_SRC
+  main.cpp$0
+  )
+
+add_executable($1 \${$1_SRC})
+
+target_link_libraries($1
+  \${Boost_LIBRARIES}
+  )
