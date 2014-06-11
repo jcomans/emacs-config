@@ -14,8 +14,8 @@
 ;; Enable Semantic code analyzer
 (semantic-mode t)
 
-;; Enable EDE
-(global-ede-mode t)
+;; Don't enable EDE
+(global-ede-mode nil)
 
 ;; Check if there are project definitions
 (if (file-directory-p "~/.emacs.d/ede-projects")

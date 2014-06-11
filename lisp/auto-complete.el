@@ -38,11 +38,11 @@
   (add-hook 'auto-complete-mode-hook 'ac-common-setup)
   (global-auto-complete-mode t))
 
-(defun my-ac-cc-mode-setup ()
+(defun my-ac-clang-mode-setup ()
   (setq ac-sources (append '(ac-source-clang ac-source-yasnippet) ac-sources)))
 
 (if (executable-find "clang")
-    (add-hook 'c-mode-common-hook 'my-ac-cc-mode-setup))
+    (add-hook 'c-mode-common-hook 'my-ac-clang-mode-setup))
 
 (my-ac-config)
 

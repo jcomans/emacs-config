@@ -13,6 +13,13 @@
 (add-to-list 'interpreter-mode-alist '("python2" . python-mode))
 (add-to-list 'interpreter-mode-alist '("python3" . python-mode))
 
+;; Use auto-newline and subword-mode
+(defun my-c-mode-common-hook ()
+  (c-toggle-auto-newline 1)
+  (subword-mode 1) )
+
+(add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
+
 ;; Use clang format if we have clang
 (if (executable-find "clang")
     (load "~/.emacs.d/lisp/vendor/clang/clang-format.el"))

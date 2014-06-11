@@ -4,3 +4,4 @@ semanticdb/
 session.*
 tramp
 .org-id-locations
+ac-comphist.dat
