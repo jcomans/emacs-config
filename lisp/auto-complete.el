@@ -24,6 +24,7 @@
 /usr/local/include
 /usr/lib/clang/3.4.1/include
 /usr/include
+/usr/include/eigen3
 ")))
 
 
