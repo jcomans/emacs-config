@@ -4,7 +4,7 @@
 ;; Load the different configration files
 (load "~/.emacs.d/lisp/general-config"   nil t)
 
-(load "~/.emacs.d/lisp/auto-complete"    nil t)
+;(load "~/.emacs.d/lisp/auto-complete"    nil t)
 (load "~/.emacs.d/lisp/cedet-config"     nil t)
 (load "~/.emacs.d/lisp/c++-config"       nil t)
 (load "~/.emacs.d/lisp/cmake-config"     nil t)

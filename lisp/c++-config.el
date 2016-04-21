@@ -15,7 +15,7 @@
 
 ;; Use auto-newline and subword-mode
 (defun my-c-mode-common-hook ()
-  (c-toggle-auto-newline 1)
+  ;(c-toggle-auto-newline 1)
   (subword-mode 1) )
 
 (add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
