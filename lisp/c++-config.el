@@ -32,3 +32,35 @@
   (c-set-offset 'innamespace [0]))
 
 (add-hook 'c++-mode-hook 'my-c-setup)
+
+(setq load-path
+       (cons (expand-file-name "~/.emacs.d/lisp/vendor/irony") load-path))
+
+(require 'irony)
+(require 'irony-cdb)
+(require 'irony-completion)
+(require 'irony-diagnostics)
+(require 'irony-snippet)
+
+;(load "~/.emacs.d/lisp/vendor/irony/irony-cdb-clang-complete.el")
+;(load "~/.emacs.d/lisp/vendor/irony/irony-cdb.el")
+;(load "~/.emacs.d/lisp/vendor/irony/irony-cdb-json.el")
+;(load "~/.emacs.d/lisp/vendor/irony/irony-cdb-libclang.el")
+;; (load "~/.emacs.d/lisp/vendor/irony/irony-completion.el")
+;; (load "~/.emacs.d/lisp/vendor/irony/irony-diagnostics.el")
+;; (load "~/.emacs.d/lisp/vendor/irony/irony-snippet.el")
+
+
+(add-hook 'c++-mode-hook 'irony-mode)
+(add-hook 'c-mode-hook 'irony-mode)
+(add-hook 'objc-mode-hook 'irony-mode)
+
+;; replace the `completion-at-point' and `complete-symbol' bindings in
+;; irony-mode's buffers by irony-mode's function
+(defun my-irony-mode-hook ()
+  (define-key irony-mode-map [remap completion-at-point]
+    'irony-completion-at-point-async)
+  (define-key irony-mode-map [remap complete-symbol]
+    'irony-completion-at-point-async))
+(add-hook 'irony-mode-hook 'my-irony-mode-hook)
+(add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
