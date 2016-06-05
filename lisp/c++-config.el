@@ -33,6 +33,7 @@
 
 (add-hook 'c++-mode-hook 'my-c-setup)
 
+;; Load irony mode for code completion
 (setq load-path
        (cons (expand-file-name "~/.emacs.d/lisp/vendor/irony") load-path))
 
@@ -41,15 +42,6 @@
 (require 'irony-completion)
 (require 'irony-diagnostics)
 (require 'irony-snippet)
-
-;(load "~/.emacs.d/lisp/vendor/irony/irony-cdb-clang-complete.el")
-;(load "~/.emacs.d/lisp/vendor/irony/irony-cdb.el")
-;(load "~/.emacs.d/lisp/vendor/irony/irony-cdb-json.el")
-;(load "~/.emacs.d/lisp/vendor/irony/irony-cdb-libclang.el")
-;; (load "~/.emacs.d/lisp/vendor/irony/irony-completion.el")
-;; (load "~/.emacs.d/lisp/vendor/irony/irony-diagnostics.el")
-;; (load "~/.emacs.d/lisp/vendor/irony/irony-snippet.el")
-
 
 (add-hook 'c++-mode-hook 'irony-mode)
 (add-hook 'c-mode-hook 'irony-mode)
@@ -64,3 +56,15 @@
     'irony-completion-at-point-async))
 (add-hook 'irony-mode-hook 'my-irony-mode-hook)
 (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+
+;; Enable company for c and c++
+(add-hook 'c++-mode-hook 'company-mode)
+(add-hook 'c-mode-hook 'company-mode)
+
+;; Integrate irony with company
+(setq load-path
+       (cons (expand-file-name "~/.emacs.d/lisp/vendor/company-irony") load-path))
+(require 'company-irony)
+
+(eval-after-load 'company
+  '(add-to-list 'company-backends 'company-irony))
