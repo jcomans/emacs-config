@@ -31,9 +31,7 @@
 (setq display-time-24hr-format  t)
 (display-time)
 
-;; Always show line numbers
-;(global-linum-mode t)
-
+;; Always show line numbers except in doc-view-mode
 (define-global-minor-mode my-global-linum-mode linum-mode
   (lambda ()
     (when (not (memq major-mode
@@ -124,12 +122,6 @@
 ;; Use aspell for spell checking
 (setq ispell-program-name "aspell")
 (setq ispell-list-command "list")
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Additional functionality
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(add-to-list 'load-path "~/.emacs.d/lisp/vendor/load-dir")
-(require 'elisp-load-dir)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Enable pkgbuild mode on arch 
