@@ -23,3 +23,12 @@
 ;; Use clang format if we have clang
 (if (executable-find "clang")
     (load "~/.emacs.d/lisp/vendor/clang/clang-format.el"))
+
+(global-set-key [XF86Launch5] 'clang-format-region)
+(global-set-key [XF86Launch9] 'clang-format-buffer)
+
+
+(defun my-c-setup ()
+  (c-set-offset 'innamespace [0]))
+
+(add-hook 'c++-mode-hook 'my-c-setup)

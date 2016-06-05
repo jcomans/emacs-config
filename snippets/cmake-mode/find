@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: find
+# key: find
+# --
+find_package($0)

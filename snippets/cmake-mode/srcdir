@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: srcdir
+# key: srcdir
+# --
+\${CMAKE_SOURCE_DIR}$0

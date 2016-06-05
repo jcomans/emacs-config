@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: link
+# key: link
+# --
+target_link_libraries($1 $0)

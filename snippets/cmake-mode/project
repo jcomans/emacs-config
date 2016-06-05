@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: project
+# key: project
+# --
+cmake_minimum_required(VERSION ${1:3.0.0})
+project($2 VERSION ${3:0.0.1} LANGUAGES ${4:CXX})
+$0

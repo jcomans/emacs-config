@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: blt
+# key: blt
+# --
+BOOST_LOG_TRIVIAL(${1:debug}) << $0

@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: fileheader
+# key: fileheader
+# --
+##************************************************************
+## CMakeLists.txt -- $1
+##
+## Copyright `(insert (format-time-string "%Y"))` Jan Comans -- jan@comans.be
+##
+## License: Boost Software License Version 1.0
+## See LICENSE_1_0.txt or http://www.boost.org/LICENSE_1_0.txt
+##************************************************************

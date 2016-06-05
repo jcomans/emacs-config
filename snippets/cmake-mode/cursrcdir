@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: cursrcdir
+# key: cursrcdir
+# --
+\${CMAKE_CURRENT_SOURCE_DIR}$0

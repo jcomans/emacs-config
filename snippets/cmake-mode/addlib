@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: addlib
+# key: addlib
+# --
+add_library($1 ${2:STATIC} $0)

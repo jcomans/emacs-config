@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: cxxstd
+# key: cxxstd
+# --
+set(CMAKE_CXX_STANDARD ${1:11})

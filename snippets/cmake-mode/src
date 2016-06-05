@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: src
+# key: src
+# --
+$1_SRC$0
