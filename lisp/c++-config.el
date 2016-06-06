@@ -64,7 +64,7 @@
 ;; Integrate irony with company
 (setq load-path
        (cons (expand-file-name "~/.emacs.d/lisp/vendor/company-irony") load-path))
-(require 'company-irony)
+
 
 (eval-after-load 'company
   '(add-to-list 'company-backends 'company-irony))
