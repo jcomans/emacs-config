@@ -63,7 +63,7 @@
 (setq make-backup-files -1)
 ;; If we enable backups, put them in a separate dir without
 ;; version numbers
-(setq version-control-nil)
+(setq version-control nil)
 (setq backup-directory-alist (quote ((".*" . "~/.emacs_backups/"))))
 
 ;; Always keep buffers in sync with files on disk
