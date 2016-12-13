@@ -1,9 +1,9 @@
 ;;; irony.el --- C/C++ minor mode powered by libclang
 
-;; Copyright (C) 2011-2014  Guillaume Papin
+;; Copyright (C) 2011-2016  Guillaume Papin
 
 ;; Author: Guillaume Papin <guillaume.papin@epitech.eu>
-;; Version: 0.2.0
+;; Version: 0.2.2-cvs
 ;; URL: https://github.com/Sarcasm/irony-mode
 ;; Compatibility: GNU Emacs 23.x, GNU Emacs 24.x
 ;; Keywords: c, convenience, tools
@@ -665,10 +665,11 @@ If no such file exists on the filesystem the special file '-' is
     (setq irony--sync-id (1+ irony--sync-id))
     (with-local-quit
       (let ((process (irony--get-server-process-create)))
-        (apply 'irony--send-request request callback args)
-        (while (not (= id (car irony--sync-result)))
-          (accept-process-output process))
-        (cdr irony--sync-result)))))
+        (when process
+          (apply 'irony--send-request request callback args)
+          (while (not (= id (car irony--sync-result)))
+            (accept-process-output process))
+          (cdr irony--sync-result))))))
 
 (defun irony--send-parse-request (request callback &rest args)
   "Send a request that acts on the current buffer to irony-server.
@@ -725,13 +726,13 @@ care of."
   ;; compile options should flush the context alternatively.
   (buffer-chars-modified-tick))
 
-(defun irony--buffer-parsed-p ()
+(defun irony--buffer-parsed-p (&optional ctx)
   (equal irony--parse-buffer-state
-         (cons (irony--parse-buffer-context) 'done)))
+         (cons (or ctx (irony--parse-buffer-context)) 'done)))
 
-(defun irony--buffer-parsing-in-progress-p ()
+(defun irony--buffer-parsing-in-progress-p (&optional ctx)
   (equal irony--parse-buffer-state
-         (cons (irony--parse-buffer-context) 'requested)))
+         (cons (or ctx (irony--parse-buffer-context)) 'requested)))
 
 (defun irony--parse-request-handler (result context buffer)
   (with-current-buffer buffer
@@ -754,7 +755,7 @@ care of."
 (defun irony--parse-buffer-async (callback &optional force)
   "Parse the current buffer and call CALLACK when done.
 
-Parsing is effectively done only if need, if the buffer hasn't
+Parsing is effectively done only if needed, if the buffer hasn't
 changed since the last parsing, CALLBACK is called immediately.
 
 Use FORCE to force a re-parse unconditionally.
@@ -774,20 +775,25 @@ symbol:
   necessarily superseded by another request)"
   (when force
     (setq irony--parse-buffer-state nil))
-  (if (irony--buffer-parsed-p)
-      (apply callback irony--parse-buffer-last-results)
-    (let (obselete-callbacks)
-      (unless (irony--buffer-parsing-in-progress-p)
-        (let ((context (irony--parse-buffer-context)))
-          (setq obselete-callbacks irony--parse-buffer-callbacks
-                irony--parse-buffer-callbacks nil
-                irony--parse-buffer-state (cons context 'requested))
-          (irony--send-parse-request "parse"
-                                    (list 'irony--parse-request-handler context
-                                          (current-buffer)))))
-      (push callback irony--parse-buffer-callbacks)
-      ;; it's safer to call this last, since the function may be called recursively
-      (mapc #'(lambda (cb) (funcall cb 'cancelled)) obselete-callbacks))))
+  (let ((context (irony--parse-buffer-context)))
+    (cond
+     ((irony--buffer-parsed-p context)
+      ;; buffer already parsed, call callback immediately
+      (apply callback irony--parse-buffer-last-results))
+     ((irony--buffer-parsing-in-progress-p context)
+      ;; the request is already pending, add callback to the list
+      (push callback irony--parse-buffer-callbacks))
+     (t
+      ;; current request is either out-of-date or inexistant,
+      ;; cancel callbacks if any, and make new request
+      (let ((obselete-callbacks irony--parse-buffer-callbacks))
+        (setq irony--parse-buffer-callbacks (list callback)
+              irony--parse-buffer-state (cons context 'requested))
+        (irony--send-parse-request "parse"
+                                   (list 'irony--parse-request-handler context
+                                         (current-buffer)))
+        ;; it's safer to call this last, since the function may be called recursively
+        (mapc #'(lambda (cb) (funcall cb 'cancelled)) obselete-callbacks))))))
 
 (defun irony-get-type--request-handler (types)
   (when types
